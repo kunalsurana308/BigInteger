@@ -1,0 +1,111 @@
+/*package Class11;
+
+import java.io.*;
+class StringDivision
+{
+public static void main(String args[])throws IOException
+{
+BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
+System.out.println("Enter the first number");
+String a=br.readLine();
+System.out.println("Enter the second number");
+String b=br.readLine();
+if(!isGreaterThanEqualTo(a,b))
+{
+System.out.println("The quotient is 0");
+System.out.println("The remainder is "+a);
+System.exit(0);
+}
+String q="",r=a;
+for(;isGreaterThanEqualTo(a,b);a=StringSubtraction.sub(a,b),q=StringAddition.add(q,"1"),r=StringSubtraction.sub(r,b));
+System.out.println("The quotient is "+q);
+System.out.println("The remainder is "+r);
+}
+
+static boolean isGreaterThanEqualTo(String a,String b)
+{
+if(a.length()>b.length())
+return true;
+else if(a.length()<b.length())
+return false;
+else
+{
+if(a.compareTo(b)>=0)
+return true;
+else
+return false;
+/*
+for(int i=0;i<a.length();i++)
+{
+if(Integer.parseInt(""+a.charAt(i))>Integer.parseInt(""+b.charAt(i)))
+return true;
+else if(Integer.parseInt(""+a.charAt(i))==Integer.parseInt(""+b.charAt(i)))
+continue;
+else
+return false;
+}
+return true;
+ **
+}
+}
+}*/
+package Class11;
+
+import java.io.*;
+class StringDivision
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
+        System.out.println("Enter the first number");
+        String a=br.readLine();
+        System.out.println("Enter the second number");
+        String b=br.readLine();
+        String d[]=divide(a,b);
+        System.out.println("The quotient is "+d[0]);
+        System.out.println("The remainder is "+d[1]);
+    }
+
+    static String[] divide(String a,String b)
+    {
+        String qr[]=new String[2];
+        if(!isGreaterThanEqualTo(a,b))
+        {
+            qr[0]="0";
+            qr[1]=a;
+            return qr;
+        }
+        String q="",r=a;
+        for(;isGreaterThanEqualTo(a,b);a=StringSubtraction.sub(a,b),q=StringAddition.add(q,"1"),r=StringSubtraction.sub(r,b));
+        qr[0]=q;
+        qr[1]=r;
+        return qr;
+    }
+
+    static boolean isGreaterThanEqualTo(String a,String b)
+    {
+        if(a.length()>b.length())
+            return true;
+        else if(a.length()<b.length())
+            return false;
+        else
+        {
+            if(a.compareTo(b)>=0)
+                return true;
+            else
+                return false;
+            /*
+            for(int i=0;i<a.length();i++)
+            {
+            if(Integer.parseInt(""+a.charAt(i))>Integer.parseInt(""+b.charAt(i)))
+            return true;
+            else if(Integer.parseInt(""+a.charAt(i))==Integer.parseInt(""+b.charAt(i)))
+            continue;
+            else
+            return false;
+            }
+            return true;
+             */
+        }
+    }
+}
