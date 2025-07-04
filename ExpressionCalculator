@@ -1,0 +1,94 @@
+package Class11;
+
+import java.io.*;
+class ExpressionCalculation
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
+        System.out.println("Enter the expression with a space before and after each no. and also between each operator");
+        String str=br.readLine();//Postfix()?
+        /*
+        int cnt=0;
+        for(int i=0;i<str.length();i++)
+        {
+            if(str.charAt(i)=='+' || str.charAt(i)=='-' || str.charAt(i)=='*' || str.charAt(i)=='/' || str.charAt(i)=='^')
+                cnt++;
+        }
+        int a[]=new int[cnt];
+        */
+        System.out.println("The result is"+bcal(str));
+    }
+    
+    static String bcal(String str)
+    {
+        while(str.indexOf("(")!=-1)
+        {
+            String t=str.substring(str.indexOf("(")+1,str.indexOf(")"));
+            str=str.replace(" ("+t+") ",cal(t));
+        }
+        while(str.indexOf("{")!=-1)
+        {
+            String t=str.substring(str.indexOf("{")+1,str.indexOf("}"));
+            str=str.replace(" {"+t+"} ",cal(t));
+        }
+        while(str.indexOf("[")!=-1)
+        {
+            String t=str.substring(str.indexOf("[")+1,str.indexOf("]"));
+            str=str.replace(" ["+t+"] ",cal(t));
+        }
+        str=cal(str);
+        return str;
+    }
+    
+    static String cal(String str)
+    {
+        String x="",y="";
+        while(str.indexOf("^")!=-1)
+        {
+            x=y="";
+            for(int i=str.indexOf("^")-2;str.charAt(i)!=' ';i--)
+                x=str.charAt(i)+x;
+            for(int i=str.indexOf("^")+2;str.charAt(i)!=' ';i++)
+                y+=str.charAt(i);
+            str=str.replace((x+" ^ "+y),StringExponent.exponent(x,y));
+        }
+        while(str.indexOf("/")!=-1)
+        {
+            x=y="";
+            for(int i=str.indexOf("/")-2;str.charAt(i)!=' ';i--)
+                x=str.charAt(i)+x;
+            for(int i=str.indexOf("/")+2;str.charAt(i)!=' ';i++)
+                y+=str.charAt(i);
+            str=str.replace((x+" / "+y),StringDivision.divide(x,y)[0]);
+        }
+        while(str.indexOf("*")!=-1)
+        {
+            x=y="";
+            for(int i=str.indexOf("*")-2;str.charAt(i)!=' ';i--)
+                x=str.charAt(i)+x;
+            for(int i=str.indexOf("*")+2;str.charAt(i)!=' ';i++)
+                y+=str.charAt(i);
+            str=str.replace((x+" * "+y),StringMultiplication.multiply(x,y));
+        }
+        while(str.indexOf("+")!=-1)
+        {
+            x=y="";
+            for(int i=str.indexOf("+")-2;str.charAt(i)!=' ';i--)
+                x=str.charAt(i)+x;
+            for(int i=str.indexOf("+")+2;str.charAt(i)!=' ';i++)
+                y+=str.charAt(i);
+            str=str.replace((x+" + "+y),StringAddition.add(x,y));
+        }
+        while(str.indexOf("- ")!=-1)
+        {
+            x=y="";
+            for(int i=str.indexOf("-")-2;str.charAt(i)!=' ';i--)
+                x=str.charAt(i)+x;
+            for(int i=str.indexOf("-")+2;str.charAt(i)!=' ';i++)
+                y+=str.charAt(i);
+            str=str.replace((x+" - "+y),StringSubtraction.sub(x,y));
+        }
+        return str;
+    }
+}
