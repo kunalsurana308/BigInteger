@@ -1,0 +1,29 @@
+package Class11;
+
+import java.io.*;
+class StringMultiplication
+{
+    public static void main(String args[])throws IOException
+    {
+        BufferedReader br=new BufferedReader (new InputStreamReader(System.in));
+        System.out.println("Enter the first number");
+        String a=br.readLine();
+        System.out.println("Enter the second number");
+        String b=br.readLine();
+        if(!StringDivision.isGreaterThanEqualTo(b,a))
+        {
+            String t=a;
+            a=b;
+            b=t;
+        }
+        System.out.println("The product is "+multiply(a,b));
+    }
+    
+    static String multiply(String a, String b)
+    {
+        String s="";
+        for(String i=a;StringDivision.isGreaterThanEqualTo(i,"1");i=StringSubtraction.sub(i,"1"))
+            s=StringAddition.add(s,b);
+        return s;
+    }
+}
